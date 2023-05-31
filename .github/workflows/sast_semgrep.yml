@@ -1,0 +1,46 @@
+name: Static Application Security Testing - Semgrep
+
+on:
+  workflow_call:
+    inputs:
+      timeout-minutes:
+        type: number
+        description: Timeout to break the job.
+        required: false
+        default: 5
+      semgrep-version:
+        type: string
+        description: Semgrep Image tag
+        required: false
+        default: '1.24'
+      runs-on:
+        type: string
+        description: Execution Runners
+        required: false
+        default: 'ubuntu-latest'      
+    secrets:
+      token:
+        required: true
+ 
+jobs:
+  sast_semgrep:
+    name: Scan Semgrep
+    runs-on: ${{ inputs.runs-on }}
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    container:
+      image: returntocorp/semgrep:${{ inputs.semgrep-version }}
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f               # @v3.3.0
+        with:
+          token: ${{ secrets.token }}
+     
+      - name: semgrep ci
+        id: scan
+        run: |
+           semgrep ci --output semgrep.output
+           cat semgrep.output
+        env:
+          SEMGREP_RULES: >-
+            p/security-audit
+            p/secrets
