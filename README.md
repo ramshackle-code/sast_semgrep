@@ -1,7 +1,7 @@
 # sast_semgrep
 Static Application Security Testing using Semgrep
 
-Reusable Workflow
+Reusable Workflow v.1.0.0
 
 Call example:
 
