@@ -25,5 +25,5 @@ Optinal parameters
      with:
        timeout-minutes: <minutes>     #Execution timeout. Default value 5 minutes
        semgrep-version: <image tag>   #Image tag. Default value 1.24
-       runs-on: <runner label>        #Runnerl Label. Default 'ubuntu-latest'
+       runs-on: <runner label>        #Runner Label. Default 'ubuntu-latest'
 ```
