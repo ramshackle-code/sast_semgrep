@@ -1,9 +1,8 @@
 # sast_semgrep
-Static Application Security Testing using Semgrep
 
-Reusable Workflow v.1.0.0
+# Static Application Security Testing using Semgrep
 
-Call example:
+## Call example:
 
 ```
 name: Static application security testing
@@ -18,12 +17,12 @@ jobs:
       token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Optinal parameters
+## Optinal parameters
 
 ```
      uses: ramshackle-code/sast_semgrep/.github/workflows/sast_semgrep.yml@[<version-tag> or <commit-sha>]
      with:
        timeout-minutes: <minutes>     #Execution timeout. Default value 5 minutes
-       semgrep-version: <image tag>   #Image tag. Default value 1.24
+       semgrep-version: <image tag>   #Image tag. Default value 1.86
        runs-on: <runner label>        #Runner Label. Default 'ubuntu-latest'
 ```
