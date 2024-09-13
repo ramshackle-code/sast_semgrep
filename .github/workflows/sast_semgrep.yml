@@ -12,7 +12,7 @@ on:
         type: string
         description: Semgrep Image tag
         required: false
-        default: '1.69'
+        default: '1.89'
       runs-on:
         type: string
         description: Execution Runners
