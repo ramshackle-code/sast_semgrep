@@ -8,11 +8,6 @@ on:
         description: Timeout to break the job.
         required: false
         default: 5
-      semgrep-version:
-        type: string
-        description: Semgrep Image tag
-        required: false
-        default: '1.89'
       runs-on:
         type: string
         description: Execution Runners
@@ -27,17 +22,24 @@ jobs:
     name: Scan Semgrep
     runs-on: ${{ inputs.runs-on }}
     timeout-minutes: ${{ inputs.timeout-minutes }}
-    container:
-      image: returntocorp/semgrep:${{ inputs.semgrep-version }}
     steps:
       - name: checkout repository
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332               #@v4.1.7
         with:
           token: ${{ secrets.token }}
+
+      - name: install python
+        uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3           #@5.2.0
+        with:
+          python-version: '3.12'
+
+      - name: install reqs
+        run: pip install -r ${{ github.workspace }}/requirements.txt
      
       - name: semgrep ci
         id: scan
         run: |
+           cd ${{ github.workspace }}
            semgrep ci --output semgrep.output
            cat semgrep.output
         env:
