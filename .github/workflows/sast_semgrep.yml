@@ -34,7 +34,7 @@ jobs:
           python-version: '3.12'
 
       - name: install reqs
-        run: pip install -r ${{ github.workspace }}/requirements.txt
+        run: pip install semgrep
      
       - name: semgrep ci
         id: scan
